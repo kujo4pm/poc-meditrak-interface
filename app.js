@@ -5,7 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const app = express();
 
+const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./swagger.json');
 // view engine setup
+
+require('dotenv').config();
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -17,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Require our routes into the application.
 require('./server/routes')(app);
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to the beginning of nothingness.',
 }));
